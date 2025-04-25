@@ -151,3 +151,26 @@
 
 </body>
 </html>
+<script>
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cartList = document.getElementById('cart-items');
+  let total = 0;
+
+  if (cart.length === 0) {
+    cartList.innerHTML = "<p>No items in cart</p>";
+  } else {
+    cart.forEach(item => {
+      let li = document.createElement('li');
+      let itemTotal = item.price * item.qty;
+      total += itemTotal;
+      li.innerHTML = ${item.name} — ₹${item.price} x ${item.qty} = ₹${itemTotal};
+      cartList.appendChild(li);
+    });
+
+    // Total price
+    let totalItem = document.createElement('h3');
+    totalItem.style.color = '#00ffcc';
+    totalItem.innerText = Total Amount: ₹${total};
+    cartList.appendChild(totalItem);
+  }
+</script>
